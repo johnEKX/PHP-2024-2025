@@ -1,65 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Odczyt danych z bazy danych</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <?php
-            $do_bazy = mysqli_connect('localhost', 'root', '', 'Klienci');
+<?php
+    $do_bazy = mysqli_connect('localhost', 'root', '', 'klienci');
+    if(!$do_bazy)
+    {
+        exit("Błąd połączenia z serwerem MySQL");
+    }
 
-            if(!$do_bazy)
-            {
-                echo "Błąd połączenia z serwerem MySQL";
+    $imie = $_POST['imie'];
+    $nazwisko = $_POST['nazwisko'];
+    $miejscowosc = $_POST['miejscowosc'];
 
-                exit;
-            }
+    $dodaj = "INSERT INTO klienci(ID_Klienta, Imie, Nazwisko, Miejscowosc) VALUES(NULL, '$imie', '$nazwisko', '$miejscowosc')";
 
-            else
-            {
-                $zapytanie = mysqli_query($do_bazy, 'SELECT * FROM Klienci');
+    $zapytanie = mysqli_query($do_bazy, $dodaj);
+    if(!$zapytanie === true)
+    {
+        echo "Nowy klient nie został dodany do bazy";
+    }
 
-                if(!$zapytanie)
-                {
-                    mysqli_close();
-                    echo "Błąd w zapytaniu <br>";
-                    ?>
-                    </body>
-                    </html>
-                    <?php
-                        exit;
-                }
-                
-                else
-                {
-                    ?>
-
-                    <table>
-                        <tr>
-                            <td>Nr Klienta</td>
-                            <td>Imię</td>
-                            <td>Nazwisko</td>
-                            <td>Miejscowość</td>
-                        </tr>
-
-                        <?php
-                            while($wiersze = mysqli_fetch_row($zapytanie))
-                            {
-                                echo "<tr>";
-                                echo "<td>$wiersze[0]</td>";
-                                echo "<td>$wiersze[1]</td>";
-                                echo "<td>$wiersze[2]</td>";
-                                echo "<td>$wiersze[3]</td>";
-                                echo "</tr>";
-                            }
-                        ?>
-                    </table>
-
-                    <?php
-                        mysqli_close($do_bazy);
-                }
-            }
-
-        ?>
-    </body>
-</html>
+    else
+    {
+        echo "Klient ".$imie." ".$nazwisko." został dodany do bazy.";
+    }
+    mysqli_close($do_bazy);
+?>
