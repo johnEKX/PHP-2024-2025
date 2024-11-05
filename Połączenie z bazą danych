@@ -1,0 +1,72 @@
+Tworzymy bazę danych 'Klienci'
+
+CREATE TABLE Klienci
+(
+    ID_Klienta int AUTO_INCREMENT PRIMARY KEY,
+    Imie varchar(30),
+    Nazwisko varchar(30),
+    Miejscowosc varchar(30)
+);
+
+INSERT INTO klienci(ID_Klienta, Imie, Nazwisko, Miejscowosc) VALUES
+(266, "Paulina", "Kachniarz", "Bielawa"),
+(643, "Marcin", "Jurczak", "Jelenia Gora"),
+(228, "Marcin", "Juralewicz", "Olesnica"),
+(343, "Maja", "Jenda", "Wroclaw"),
+(440, "Karolina", "Jarosiewicz", "Sobotka"),
+(505, "Paulina", "Januszewska", "Sobotka"),
+(527, "Maja", "Janukowicz", "Sobotka"),
+(388, "Marek", "Jakubowski", "Wroclaw"),
+(377, "Damian", "Kukulski", "Walbrzych"),
+(542, "Anna", "Krzywiec", "Wroclaw"),
+(513, "Maja", "Kruz", "Walbrzych"),
+(270, "Mateusz", "Krupa", "Wroclaw"),
+(700, "Mateusz", "Kruk", "Sobotka"),
+(676, "Mateusz", "Krol", "Wroclaw"),
+(352, "Joanna", "Zebala", "Walbrzych"),
+(296, "Karolina", "Zbieska", "Sobotka"),
+(455, "Malgorzata", "Warda", "Olesnica"),
+(250, "Anna", "Srokowska","Wolow"),
+(500, "Mateusz", "Smal", "Sobotka"),
+(645, "Dorota", "Sikora", "Trzebnica"),
+(332, "Ewa", "Rautenberg", "Wroclaw"),
+(408, "Mateusz", "Podrazka", "Sobotka"),
+(275, "Pawel", "Pilewski", "Wroclaw"),
+(644, "Malgorzata", "Ordecka", "Olesnica"),
+(585, "Marek", "Kozinski", "Bielawa");
+
+Skrypt połączenia z bazą danych Klienci:
+
+<?php
+    $serwer = 'localhost';
+    $login = 'root';
+    $haslo = '';
+    $baza = 'Klienci';
+
+    $do_bazy = mysqli_connect($serwer, $login, $haslo, $baza);
+
+    if(mysqli_connect_errno())
+    {
+        exit("Błąd połączenia z serwerem MySQL:".mysqli_connect_error());
+    }
+    else
+    {
+        echo "Połączono z serwerem bazy danych.<br>";
+    }
+?>
+
+lub
+
+<?php
+    $do_bazy = mysqli_connect('localhost', 'root', '', 'Klienci');
+
+    if(mysqli_connect_errno())
+    {
+        exit("Błąd połączenia z serwerem MySQL:".mysqli_connect_error());
+    }
+    else
+    {
+        echo "Połączono z serwerem bazy danych.<br>";
+    }
+    mysqli_close($do_bazy);
+?>
