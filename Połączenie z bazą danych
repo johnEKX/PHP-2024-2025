@@ -38,12 +38,7 @@ INSERT INTO klienci(ID_Klienta, Imie, Nazwisko, Miejscowosc) VALUES
 Skrypt połączenia z bazą danych Klienci:
 
 <?php
-    $serwer = 'localhost';
-    $login = 'root';
-    $haslo = '';
-    $baza = 'Klienci';
-
-    $do_bazy = mysqli_connect($serwer, $login, $haslo, $baza);
+    $do_bazy = mysqli_connect('localhost', 'root', '', 'Klienci');
 
     if(mysqli_connect_errno())
     {
